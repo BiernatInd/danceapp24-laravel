@@ -130,6 +130,22 @@ class ReservationsController extends Controller
         return response()->json(['message' => 'Reservation updated successfully']);
     }
 
+    public function schoolReservationsAddClassName(Request $request)
+    {
+        $reservation = ReservationsList::where('school_name', $request->school_name)
+                                        ->where('slug', $request->slug)
+                                        ->first();
+    
+        if (!$reservation) {
+            return response()->json(['message' => 'Reservation not found'], 404);
+        }
+    
+        $reservation->class_name= $request->class_name;
+        $reservation->save();
+    
+        return response()->json(['message' => 'Reservation updated successfully']);
+    }
+
     public function schoolReservationsAddTime(Request $request)
     {
         $reservation = ReservationsList::where('school_name', $request->school_name)
@@ -264,6 +280,25 @@ class ReservationsController extends Controller
 
         if ($request->has('class_type')) {
             $reservation->class_type = $request->class_type;
+        }
+
+        $reservation->save();
+
+        return response()->json(['message' => 'Reservation updated successfully', 'updated_reservation' => $reservation]);
+    }
+
+    public function schoolReservationsEditClassName(Request $request, $school_name, $slug)
+    {
+        $reservation = ReservationsList::where('school_name', $school_name)
+                                       ->where('slug', $slug)
+                                       ->first();
+
+        if (!$reservation) {
+            return response()->json(['message' => 'Reservation not found'], 404);
+        }
+
+        if ($request->has('class_name')) {
+            $reservation->class_name = $request->class_name;
         }
 
         $reservation->save();

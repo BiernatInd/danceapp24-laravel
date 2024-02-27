@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Main\Reservations;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Reservations\ReservationsList;
-use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
 class ReservationsController extends Controller
@@ -19,14 +18,14 @@ class ReservationsController extends Controller
         return response()->json($reservations);
     }
     
-    public function getReservationsFilterSchoolName($date, $schoolName = null)
+    public function getReservationsFilterClassName($date, $className = null)
     {
         $formattedDate = str_replace('-', '.', $date);
 
         $query = ReservationsList::where('reservation_start_date', $formattedDate);
 
-        if ($schoolName && $schoolName !== 'all') {
-            $query->where('school_name', $schoolName);
+        if ($className && $className !== 'all') {
+            $query->where('class_name', $className);
         }
         $reservations = $query->get();
 

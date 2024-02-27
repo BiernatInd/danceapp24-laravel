@@ -25,7 +25,7 @@ Route::post('/login', 'App\Http\Controllers\Authentication\LoginController@login
 Route::post('/recover-password', 'App\Http\Controllers\Authentication\RecoverPasswordController@recoverPassword');
 Route::post('/reset-password/{token}', 'App\Http\Controllers\Authentication\ResetPasswordController@resetPassword');
 Route::get('/reservations-list/{date}', 'App\Http\Controllers\Main\Reservations\ReservationsController@getReservationsDate');
-Route::get('/reservations-list/{date}/school-name/{schoolName?}', 'App\Http\Controllers\Main\Reservations\ReservationsController@getReservationsFilterSchoolName');
+Route::get('/reservations-list/{date}/class-name/{className?}', 'App\Http\Controllers\Main\Reservations\ReservationsController@getReservationsFilterClassName');
 Route::get('/reservations-list/{date}/instructor/{instructor?}', 'App\Http\Controllers\Main\Reservations\ReservationsController@getReservationsFilterInstructor');
 Route::get('/reservations-list/{date}/class-type/{classType?}', 'App\Http\Controllers\Main\Reservations\ReservationsController@getReservationsFilterClassType');
 Route::get('/categories', 'App\Http\Controllers\Main\Category\CategoryController@getCategories');
@@ -43,6 +43,7 @@ Route::get('/school-reservations-list-slug/{school_name}/{slug}', 'App\Http\Cont
 Route::delete('/school-reservations-delete/{id}', 'App\Http\Controllers\School\Reservations\ReservationsController@schoolReservationsDelete');
 Route::post('/school-reservations-add', 'App\Http\Controllers\School\Reservations\ReservationsController@schoolReservationsAdd');
 Route::post('/school-reservations-add-places', 'App\Http\Controllers\School\Reservations\ReservationsController@schoolReservationsAddPlaces');
+Route::post('/school-reservations-add-class-name', 'App\Http\Controllers\School\Reservations\ReservationsController@schoolReservationsAddClassName');
 Route::post('/school-reservations-add-time', 'App\Http\Controllers\School\Reservations\ReservationsController@schoolReservationsAddTime');
 Route::post('/school-reservations-add-start-date', 'App\Http\Controllers\School\Reservations\ReservationsController@schoolReservationsAddStartDate');
 Route::post('/school-reservations-add-end-date', 'App\Http\Controllers\School\Reservations\ReservationsController@schoolReservationsAddEndDate');
@@ -52,6 +53,7 @@ Route::post('/school-reservations-add-instructor', 'App\Http\Controllers\School\
 Route::post('/school-reservations-add-price', 'App\Http\Controllers\School\Reservations\ReservationsController@schoolReservationsAddPrice');
 Route::get('/school-reservations-download-content/{school_name}/{slug}', 'App\Http\Controllers\School\Reservations\ReservationsController@schoolReservationsDownloadContent');
 Route::put('/school-reservations-edit-class-type/{school_name}/{slug}', 'App\Http\Controllers\School\Reservations\ReservationsController@schoolReservationsEditClassType');
+Route::put('/school-reservations-edit-class-name/{school_name}/{slug}', 'App\Http\Controllers\School\Reservations\ReservationsController@schoolReservationsEditClassName');
 Route::put('/school-reservations-edit-places/{school_name}/{slug}', 'App\Http\Controllers\School\Reservations\ReservationsController@schoolReservationsEditPlaces');
 Route::put('/school-reservations-edit-start-date/{school_name}/{slug}', 'App\Http\Controllers\School\Reservations\ReservationsController@schoolReservationsEditStartDate');
 Route::put('/school-reservations-edit-end-date/{school_name}/{slug}', 'App\Http\Controllers\School\Reservations\ReservationsController@schoolReservationsEditEndDate');
@@ -107,7 +109,10 @@ Route::get('/blog-download-all-data', 'App\Http\Controllers\Admin\Blog\BlogContr
 Route::get('/blog-download-article/{slug}', 'App\Http\Controllers\Admin\Blog\BlogController@downloadBlogArticle');
 Route::get('/blog-download-meta/{slug}', 'App\Http\Controllers\Admin\Blog\BlogController@downloadBlogMeta');
 Route::get('/blog-meta-data/{articleId}', 'App\Http\Controllers\AdminPanel\BlogController@downloadMetaData');
-Route::post('/initiate-payment', 'App\Http\Controllers\Payments\PayPal\PayPalController@payPalPayment');
+Route::post('/initiate-school-payment', 'App\Http\Controllers\Payments\PayPal\PayPalController@payPalSchoolPayment');
+Route::post('/execute-school-payment', 'App\Http\Controllers\Payments\PayPal\PayPalController@executeSchoolPayment');
+Route::post('/initiate-client-payment', 'App\Http\Controllers\Payments\PayPal\PayPalController@payPalClientPayment');
+Route::post('/execute-client-payment', 'App\Http\Controllers\Payments\PayPal\PayPalController@executeClientPayment');
 
 // Route::get('/czyscimy', function () {
 //     $foldersToDelete = [

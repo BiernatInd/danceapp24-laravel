@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Mail;
 class OrdersController extends Controller
 {
     public function sendOrders(Request $request) {
-        \Log::info($request->all());
         $validatedData = $request->validate([
             'school_name' => 'required|string',
             'class_hours' => 'required|string',
             'class_type' => 'required|string',
+            'class_name' => 'required|string',
             'designation' => 'required|string',
             'room_number' => 'required|string',
             'places_for_women' => 'required|string',

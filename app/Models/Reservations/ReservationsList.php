@@ -15,6 +15,7 @@ class ReservationsList extends Model
         'school_name',
         'class_hours',
         'class_type',
+        'class_name',
         'designation',
         'room_number',
         'places_for_women',

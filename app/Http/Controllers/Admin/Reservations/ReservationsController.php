@@ -110,12 +110,14 @@ class ReservationsController extends Controller
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'role' => 'school',
+            'update_role' => now()->addDays(30)->toDateString(),
         ]);
 
         $user->save();
 
         return response()->json(['message' => 'Użytkownik zarejestrowany pomyślnie'], 201);
     }
+
     
     public function adminOrdersList()
     {

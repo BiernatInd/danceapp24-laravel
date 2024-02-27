@@ -13,6 +13,7 @@ class CreateOrdersListTable extends Migration
             $table->string('school_name');
             $table->string('class_hours');
             $table->string('class_type');
+            $table->string('class_name');
             $table->string('designation');
             $table->string('room_number');
             $table->string('places_for_women');

@@ -13,6 +13,7 @@ class CreateReservationsListTable extends Migration
             $table->string('school_name');
             $table->string('class_hours')->nullable();
             $table->string('class_type')->nullable();
+            $table->string('class_name')->nullable();
             $table->string('designation')->nullable();
             $table->string('room_number')->nullable();
             $table->string('places_for_women')->nullable();
